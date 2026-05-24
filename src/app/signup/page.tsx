@@ -31,7 +31,7 @@ const SignUp = () => {
                 return;
             }
 
-            router.push("/");
+            router.push("/profiles");
         }catch(error){
             console.log(error);
         }
@@ -77,8 +77,8 @@ const SignUp = () => {
                 <p className="text-base text-[#ffffffb3] text-center">OR</p>
 
                 <div className="flex items-center justify-center gap-6">
-                    <FcGoogle className="cursor-pointer w-11 h-11 hover:scale-110 transition" />
-                    <BsGithub className="cursor-pointer w-11 h-11 hover:scale-110 transition text-white" />
+                    <FcGoogle className="cursor-pointer w-11 h-11 hover:scale-110 transition" onClick={() => signIn("google", {callbackUrl: "/profiles"})} />
+                    <BsGithub className="cursor-pointer w-11 h-11 hover:scale-110 transition text-white" onClick={() => signIn("github", {callbackUrl: "/profiles"})} />
                 </div>
 
                 <div className="text-center">

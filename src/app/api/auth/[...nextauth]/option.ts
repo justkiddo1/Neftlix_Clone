@@ -3,6 +3,8 @@ import bcrypt from "bcryptjs";
 import  User  from "@/models/User";
 import {AuthOptions} from "next-auth";
 import CredentialsProvider  from "next-auth/providers/credentials";
+import GoogleProvider from "next-auth/providers/google"
+import GitHubProvider from "next-auth/providers/github"
 
 export const authOptions: AuthOptions = {
     providers: [
@@ -44,7 +46,36 @@ export const authOptions: AuthOptions = {
                 }
             },
         }),
+        GoogleProvider({
+            clientId: process.env.GOOGLE_CLIENT_ID!,
+            clientSecret: process.env.GOOGLE_CLIENT_SECRET!
+        }),
+        GitHubProvider({
+            clientId: process.env.GITHUB_CLIENT_ID!,
+            clientSecret: process.env.GITHUB_CLIENT_SECRET!,
+        }),
     ],
+    callbacks: {
+        async signIn({user}) {
+            try{
+                await connectToDB();
+
+                const existingUser = await User.findOne({email: user.email});
+
+                if(!existingUser){
+                    await User.create({
+                        email: user.email,
+                        name: user.name,
+                        image: user.image,
+                    });
+                }
+            }catch(error){
+                console.log(error)
+                return false;
+            }
+            return true;
+        },
+    },
     pages: {
         signIn: "/login"
     },

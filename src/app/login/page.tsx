@@ -2,7 +2,7 @@
 import { Input } from "@/shared/ui/Input";
 import { signIn } from "next-auth/react";
 import Link from "next/link";
-import { useRouter } from "next/router";
+import { useRouter } from "next/navigation";
 import { useState } from "react"
 import { BsGithub } from "react-icons/bs";
 import { FcGoogle } from "react-icons/fc";
@@ -27,7 +27,7 @@ const Login = () => {
                 return;
             }
 
-            router.push("/");
+            router.push("/profiles");
         }catch(error){
             console.log(error);
         }
@@ -50,14 +50,14 @@ const Login = () => {
 
                 <button className="cursor-pointer w-full bg-[#e50914] hover:bg-[#f40612] 
                          text-base font-medium rounded-lg py-3.5 transition" onClick={handleLogin}>
-                    Sign Up
+                    Login
                 </button>
 
                 <p className="text-base text-[#ffffffb3] text-center">OR</p>
 
                 <div className="flex items-center justify-center gap-6">
-                    <FcGoogle className="cursor-pointer w-11 h-11 hover:scale-110 transition" />
-                    <BsGithub className="cursor-pointer w-11 h-11 hover:scale-110 transition text-white" />
+                    <FcGoogle className="cursor-pointer w-11 h-11 hover:scale-110 transition" onClick={() => signIn("google", {callbackUrl: "/profiles"})} />
+                    <BsGithub className="cursor-pointer w-11 h-11 hover:scale-110 transition text-white" onClick={() => signIn("github", {callbackUrl: "/profiles"})} />
                 </div>
 
                 <div className="text-center">
