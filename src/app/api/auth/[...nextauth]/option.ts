@@ -40,7 +40,12 @@ export const authOptions: AuthOptions = {
                         throw new Error("Invalid email or password");
                     }
                     
-                    return user;
+                    return {
+                        id : user._id.toString(),
+                        name: user.name,
+                        email: user.email,
+                        image: user.image,
+                    };
                 }catch(error){
                     throw error;
                 }
@@ -56,7 +61,10 @@ export const authOptions: AuthOptions = {
         }),
     ],
     callbacks: {
-        async signIn({user}) {
+        async signIn({user, account}) {
+
+            if(account?.provider === "credentials") return true;
+
             try{
                 await connectToDB();
 
@@ -69,13 +77,29 @@ export const authOptions: AuthOptions = {
                         image: user.image,
                     });
                 }
+
+                return true;
             }catch(error){
                 console.log(error)
                 return false;
             }
-            return true;
+        },
+
+        async jwt({token, user}){
+            if(user){
+                token.id = user.id;
+            }
+            return token;
+        },
+
+        async session({ session, token }) {
+            if (session.user) {
+                (session.user as any).id = token.id;
+            }
+            return session;
         },
     },
+
     pages: {
         signIn: "/login"
     },
