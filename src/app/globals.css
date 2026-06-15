@@ -135,14 +135,6 @@ body{
   }
 }
 
-.loginContainer::before{
-  background-image: url("https://assets.nflxext.com/ffe/siteui/vlv3/fcfcd5ee-d40a-43d7-bebc-9e9aae7f7798/web/IN-en-20250922-TRIFECTA-perspective_4fd75b17-c493-446a-a3de-3d1ab753c304_large.jpg");
-  content: "";
-  position: absolute;
-  inset: 0;
-  opacity: 0.5;
-}
-
 .popupShadow {
   box-shadow: rgba(0, 0, 0, 0.75) 0px 3px 10px;
 }

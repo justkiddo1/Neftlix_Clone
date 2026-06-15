@@ -37,7 +37,7 @@ const Login = () => {
         <div className="loginContainer min-h-screen bg-black relative flex items-center justify-center overflow-hidden">
             <div className="absolute inset-0 bg-cover bg-center bg-no-repeat opacity-50 z-0"
                 style={{
-                    backgroundImage: `url("https://assets.nflxext.com/ffe/siteui/vlv3/fcfcd5ee-d40a-43d7-bebc-9e9aae7f7798/web/IN-en-20250922-TRIFECTA-perspective_4fd75b17-c493-446a-a3de-3d1ab753c304_large.jpg")`
+                    backgroundImage: `url("/assets/neftlix_background_img.jpg")`
                 }}
             />
 

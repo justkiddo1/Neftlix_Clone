@@ -13,7 +13,7 @@ export async function GET() {
 
         return NextResponse.json(movies, {status: 200 });
     }catch(error){
-        console.log(error);
+        console.log("GET /api/movies error:", error);
         return NextResponse.json({message: "Failed to fetch movies"}, {status: 500});
     }
 }

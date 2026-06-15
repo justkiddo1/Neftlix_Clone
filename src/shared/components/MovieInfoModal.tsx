@@ -1,5 +1,5 @@
 import { useRef } from "react";
-import { Dialog, DialogContent, DialogTitle } from "../ui/Dialog";
+import { Dialog, DialogContent, DialogDescription, DialogTitle } from "../ui/Dialog";
 import { IMovie } from "@/types/movie.types";
 import Image from "next/image";
 import { Dot } from "lucide-react";
@@ -18,7 +18,10 @@ const MovieInfoModal = ({showInfoModal, setShowInfoModal, movieData} : IMovieInf
         }
     } 
     return <Dialog open={showInfoModal} onOpenChange={() => setShowInfoModal(false)}>
-        <DialogTitle></DialogTitle>
+        <DialogTitle className="sr-only">Movie Info</DialogTitle>
+        <DialogDescription className="sr-only">
+            Movie details and playback
+        </DialogDescription>
         <DialogContent className="bg-[#181818] border-none min-w-[700px] p-0">
             <div className="flex flex-col gap-4 w-full">
                 <div className="relative">
@@ -41,7 +44,7 @@ const MovieInfoModal = ({showInfoModal, setShowInfoModal, movieData} : IMovieInf
                             U/A 13+
                         </span>
                         <span className="text-[#bcbcbc] text-base">{movieData?.duration}</span>
-                        <span className="text-[bcbcbc] border border-[#fff6] rounded-[3px] text-xs px-1.5">HD</span>
+                        <span className="text-[#bcbcbc] border border-[#fff6] rounded-[3px] text-xs px-1.5">HD</span>
                     </div>
                     <p className="text-base leading-[26px] text-white">{movieData?.description}</p>
                     <div className="flex">
